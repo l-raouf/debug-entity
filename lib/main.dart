@@ -1,8 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MaterialApp(
-  home: Home(),
-));
+Future<void> main() async{
+  //You need to init Firebase first then lunch the app!
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: Home(),
+  ));
+}
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
