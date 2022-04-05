@@ -1,8 +1,8 @@
-import 'dart:developer';
 
 import 'package:debug_entity/models/advice-model.dart';
 import 'package:debug_entity/services/adviceServices.dart';
 import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
           child: Column(
             children: [
               Row(
@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
               SizedBox(
-                height: 24,
+                height: 4,
               ),
               Column(
                 children: [
@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: 16,),
+                  SizedBox(height: 12,),
                   Container(
                     width: MediaQuery.of(context).size.width,
                     child: Column(
@@ -80,25 +80,25 @@ class _HomeState extends State<Home> {
                             SizedBox(
                               height: 100,
                               child: StreamBuilder<List<AdviceModel>>(
-                                stream: getAdvice(),
-                                builder: (context, snapshot) {
-                                  if(snapshot.hasData){
-                                    final advices=snapshot.data!;
-                                    advLength=advices.length;
-                                    return PageView(
-                                      controller: _controler,
-                                      children: advices.map(buildAdvice).toList(),
-                                    );
-                                  }else{
-                                    return Text('No Advices Today');
-                                  }
+                                  stream: getAdvice(),
+                                  builder: (context, snapshot) {
+                                    if(snapshot.hasData){
+                                      final advices=snapshot.data!;
+                                      advLength=advices.length;
+                                      return PageView(
+                                        controller: _controler,
+                                        children: advices.map(buildAdvice).toList(),
+                                      );
+                                    }else{
+                                      return Text('No Advices Today');
+                                    }
 
-                                }
+                                  }
                               ),
                             ),
                             SmoothPageIndicator(
                               controller: _controler,
-                              count: advLength,//advices.length
+                              count: advLength,
                               effect: ExpandingDotsEffect(
                                 activeDotColor: HexColor('#E4A951'),
                                 dotColor: HexColor('#E5E1E1'),
@@ -273,3 +273,34 @@ class _HomeState extends State<Home> {
   );
 }
 
+/*
+StreamBuilder<List<AdviceModel>>(
+                                stream: getAdvice(),
+                                builder: (context, snapshot) {
+                                  if(snapshot.hasData){
+                                    final advices=snapshot.data!;
+                                    advLength=advices.length;
+                                    return PageView(
+                                      controller: _controler,
+                                      children: advices.map(buildAdvice).toList(),
+                                    );
+                                  }else{
+                                    return Text('No Advices Today');
+                                  }
+
+                                }
+                              ),
+ */
+/*
+SmoothPageIndicator(
+                              controller: _controler,
+                              count: advices.length,
+                              effect: ExpandingDotsEffect(
+                                activeDotColor: HexColor('#E4A951'),
+                                dotColor: HexColor('#E5E1E1'),
+                                dotHeight: 10,
+                                dotWidth: 10,
+                                spacing: 16,
+                              ),
+                            ),
+ */

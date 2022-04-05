@@ -18,7 +18,7 @@ void suggestAdvice(String category, String body) async {
           msg: "something went wrong, check your connection or try later"));
 }
  Stream<List<AdviceModel>>getAdvice() =>
-  db.collection("advices").limit(1).snapshots().map((snapshot) =>
+  db.collection("advices").limit(2).snapshots().map((snapshot) =>
     snapshot.docs.map((doc) =>AdviceModel.fromJson(doc.data())
     ).toList()
   );
