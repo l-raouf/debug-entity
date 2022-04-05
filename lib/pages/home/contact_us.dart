@@ -2,9 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class ContactUs extends StatelessWidget {
+import '../../services/contactServices.dart';
+class ContactUs extends StatefulWidget {
   const ContactUs({Key? key}) : super(key: key);
 
+  @override
+  _ContactUsState createState() => _ContactUsState();
+}
+
+class _ContactUsState extends State<ContactUs> {
+  final _formkey= GlobalKey<FormState>();
+  final TextEditingController emailController= new TextEditingController();
+  final TextEditingController titleController=new TextEditingController();
+  final TextEditingController bodyController=new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +93,11 @@ class ContactUs extends StatelessWidget {
                                 decoration: const InputDecoration(
                                   hintText: 'E-mail',
                                 ),
+                                controller: emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                onSaved: (value){
+                                  emailController.text=value!;
+                                },
                                 validator: (String? value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter your E-mail';
@@ -97,6 +112,11 @@ class ContactUs extends StatelessWidget {
                                 decoration: const InputDecoration(
                                   hintText: 'Title',
                                 ),
+                                controller: titleController,
+                                keyboardType: TextInputType.text,
+                                onSaved: (value){
+                                  titleController.text=value!;
+                                },
                                 validator: (String? value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter a title';
@@ -113,6 +133,10 @@ class ContactUs extends StatelessWidget {
                                 decoration: const InputDecoration(
                                   hintText: 'Message',
                                 ),
+                                controller: bodyController,
+                                onSaved: (value){
+                                  bodyController.text=value!;
+                                },
                                 validator: (String? value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter your message';
@@ -125,7 +149,10 @@ class ContactUs extends StatelessWidget {
                               ),
                               Center(
                                 child: GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    sendMessage(emailController.text,titleController.text,bodyController.text);
+                                    //Navigator.pop(context);
+                                  },
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40),
@@ -169,3 +196,5 @@ class ContactUs extends StatelessWidget {
     );
   }
 }
+
+
