@@ -74,8 +74,7 @@ class _FoodPState extends State<FoodP> {
                                     )),
                                 Align(
                                   alignment: Alignment(0, -2.0),
-                                  child: Image.asset(
-                                      'assets/images/hilalremoved.png'),
+                                  child: Image.asset('assets/hilalremoved.png'),
                                 ),
                                 Dialog(
                                     shape: RoundedRectangleBorder(

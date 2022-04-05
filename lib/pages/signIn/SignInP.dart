@@ -20,7 +20,7 @@ class _SignInPState extends State<SignInP> {
         ),
         Align(
             alignment: Alignment(0.0, -1),
-            child: Image(image: AssetImage('assets/images/hilal2.jpg'))),
+            child: Image(image: AssetImage('assets/hilal2.jpg'))),
         Align(
             alignment: Alignment(0.0, 0.99),
             child: Container(
