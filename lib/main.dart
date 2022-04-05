@@ -9,6 +9,6 @@ Future<void> main() async{
   await Firebase.initializeApp();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Home(),
+    home: ContactUs(),
   ));
 }

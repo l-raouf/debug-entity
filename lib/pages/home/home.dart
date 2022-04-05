@@ -48,7 +48,62 @@ class _HomeState extends State<Home> {
                   IconButton(
                     icon: Icon(Icons.logout),
                     iconSize: 36,
-                    onPressed: (){},
+                    onPressed: (){
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(32),
+                              child: Container(
+                                height: 140,
+                                width: 100,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'Are you sure ?',
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.check,
+                                            size: 32,
+                                            color: HexColor('#22BB3A'),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 24,
+                                        ),
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.close,
+                                            size: 32,
+                                            color: HexColor('#E02323'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
@@ -272,35 +327,3 @@ class _HomeState extends State<Home> {
     ),
   );
 }
-
-/*
-StreamBuilder<List<AdviceModel>>(
-                                stream: getAdvice(),
-                                builder: (context, snapshot) {
-                                  if(snapshot.hasData){
-                                    final advices=snapshot.data!;
-                                    advLength=advices.length;
-                                    return PageView(
-                                      controller: _controler,
-                                      children: advices.map(buildAdvice).toList(),
-                                    );
-                                  }else{
-                                    return Text('No Advices Today');
-                                  }
-
-                                }
-                              ),
- */
-/*
-SmoothPageIndicator(
-                              controller: _controler,
-                              count: advices.length,
-                              effect: ExpandingDotsEffect(
-                                activeDotColor: HexColor('#E4A951'),
-                                dotColor: HexColor('#E5E1E1'),
-                                dotHeight: 10,
-                                dotWidth: 10,
-                                spacing: 16,
-                              ),
-                            ),
- */
