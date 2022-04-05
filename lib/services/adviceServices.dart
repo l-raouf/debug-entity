@@ -1,4 +1,6 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:debug_entity/models/advice-model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 final db = FirebaseFirestore.instance;
@@ -15,7 +17,10 @@ void suggestAdvice(String category, String body) async {
       .catchError((error) => Fluttertoast.showToast(
           msg: "something went wrong, check your connection or try later"));
 }
- getAdvice() async{
-  var result=await db.collection("advices").limit(1).get();
-  return result.docs[0].data();
-}
+ Stream<List<AdviceModel>>getAdvice() =>
+  db.collection("advices").limit(1).snapshots().map((snapshot) =>
+    snapshot.docs.map((doc) =>AdviceModel.fromJson(doc.data())
+    ).toList()
+  );
+
+

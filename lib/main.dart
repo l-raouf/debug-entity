@@ -5,14 +5,7 @@ import 'package:debug_entity/pages/home/home.dart';
 Future<void> main() async{
   //You need to init Firebase first then lunch the app!
   WidgetsFlutterBinding.ensureInitialized();
-  /*await Firebase.initializeApp(
-    options: FirebaseOptions(
-      apiKey: "XXX",
-      appId: "XXX",
-      messagingSenderId: "XXX",
-      projectId: "XXX",
-    ),
-  );*/
+  await Firebase.initializeApp();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: Home(),
