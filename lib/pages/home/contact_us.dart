@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-
 import '../../services/contactServices.dart';
 class ContactUs extends StatefulWidget {
   const ContactUs({Key? key}) : super(key: key);
@@ -151,6 +150,45 @@ class _ContactUsState extends State<ContactUs> {
                                 child: GestureDetector(
                                   onTap: () {
                                     sendMessage(emailController.text,titleController.text,bodyController.text);
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return Dialog(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(20),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(28),
+                                            child: Container(
+                                              height: 140,
+                                              width: 100,
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                    'Thanks',
+                                                    style: TextStyle(
+                                                      fontSize: 24,
+                                                      fontWeight: FontWeight.w600,
+                                                      fontFamily: 'Poppins',
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 24,
+                                                  ),
+                                                  Text(
+                                                      'We will make sure to check your suggestion',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
                                     //Navigator.pop(context);
                                   },
                                   child: Container(
