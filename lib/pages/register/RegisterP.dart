@@ -1,4 +1,4 @@
-import 'package:debug_entity/pages/SignIn/SignInP.dart';
+import 'package:debug_entity/pages/signIn/SignInP.dart';
 import 'package:flutter/material.dart';
 
 class RegisterP extends StatefulWidget {
