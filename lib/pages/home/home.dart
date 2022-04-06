@@ -1,7 +1,13 @@
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:debug_entity/models/advice-model.dart';
+import 'package:debug_entity/pages/LeaderBoard/LeaderBoard.dart';
 import 'package:debug_entity/pages/SignIn/SignInP.dart';
+import 'package:debug_entity/pages/Task/FoodP.dart';
+import 'package:debug_entity/pages/botnavbar/HomeP.dart';
+import 'package:debug_entity/pages/recipe/RecipeP.dart';
 import 'package:debug_entity/services/adviceServices.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -12,6 +18,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../models/user-model.dart';
 import '../../services/authServices.dart';
+import '../../services/userServices.dart';
 
 class Home extends StatefulWidget {
   final UserModel user;
@@ -28,12 +35,10 @@ class _HomeState extends State<Home> {
   final _controler = PageController();
   int rank = 178;
   int food = 12;
-
-
   @override
   Widget build(BuildContext context) {
     double lineWidth = MediaQuery.of(context).size.width * 0.9;
-
+    List<UserModel> listLead=[];
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -192,129 +197,154 @@ class _HomeState extends State<Home> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          child: GestureDetector(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 32),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'My ranking',
-                                    style: TextStyle(
-                                      color: Colors.grey[300],
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
+                        InkWell(
+                          onTap: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context)=>LeaderBoard())
+                            );
+                          },
+                          child: Container(
+                            child: GestureDetector(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'My ranking',
+                                      style: TextStyle(
+                                        color: Colors.grey[300],
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 8,),
-                                  Text(
-                                    rank.toString(),
-                                    style: TextStyle(
+                                    SizedBox(height: 8,),
+                                    Text(
+                                      rank.toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    SizedBox(height: 24,),
+                                    Icon(
+                                      Icons.arrow_right_alt,
                                       color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 20,
+                                      size: 32,
                                     ),
-                                  ),
-                                  SizedBox(height: 24,),
-                                  Icon(
-                                    Icons.arrow_right_alt,
-                                    color: Colors.white,
-                                    size: 32,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
+                              onTap: () {
+                              },
                             ),
-                            onTap: () {},
-                          ),
-                          width: lineWidth * 0.55,
-                          height: imageHeight,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/my_ranking.png'),
-                              fit: BoxFit.fill,
+                            width: lineWidth * 0.55,
+                            height: imageHeight,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/my_ranking.png'),
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                         ),
-                        Container(
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 32),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'My food',
-                                    style: TextStyle(
-                                      color: Colors.grey[300],
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
+                        InkWell(
+                          onTap: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context)=>RecipeP())
+                            );
+                          },
+                          child: Container(
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'My food',
+                                      style: TextStyle(
+                                        color: Colors.grey[300],
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 8,),
-                                  Text(
-                                    food.toString(),
-                                    style: TextStyle(
+                                    SizedBox(height: 8,),
+                                    Text(
+                                      food.toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    SizedBox(height: 24,),
+                                    Icon(
+                                      Icons.arrow_right_alt,
                                       color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 20,
+                                      size: 32,
                                     ),
-                                  ),
-                                  SizedBox(height: 24,),
-                                  Icon(
-                                    Icons.arrow_right_alt,
-                                    color: Colors.white,
-                                    size: 32,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          width: lineWidth * 0.4,
-                          height: imageHeight,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/my_food.png'),
-                              fit: BoxFit.fill,
+                            width: lineWidth * 0.4,
+                            height: imageHeight,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/my_food.png'),
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                         ),
                       ],
                     ),
                     SizedBox(height: 16,),
-                    Container(
-                      child: GestureDetector(
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(20, 80, 20, 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'My tasks',
-                                style: TextStyle(
-                                  color: Colors.grey[300],
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 18,
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context)=>FoodP(user: widget.user))
+                        );
+                      },
+                      child: Container(
+                        child: GestureDetector(
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(20, 80, 20, 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'My tasks',
+                                  style: TextStyle(
+                                    color: Colors.grey[300],
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 8,),
-                              Icon(
-                                Icons.arrow_right_alt,
-                                color: Colors.white,
-                                size: 32,
-                              ),
-                            ],
+                                SizedBox(height: 8,),
+                                Icon(
+                                  Icons.arrow_right_alt,
+                                  color: Colors.white,
+                                  size: 32,
+                                ),
+                              ],
+                            ),
                           ),
+                          onTap: () {},
                         ),
-                        onTap: () {},
-                      ),
-                      width: lineWidth,
-                      height: imageHeight,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/my_tasks.png'),
-                          fit: BoxFit.fill,
+                        width: lineWidth,
+                        height: imageHeight,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/my_tasks.png'),
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     ),
