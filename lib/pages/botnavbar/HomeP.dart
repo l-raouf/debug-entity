@@ -24,7 +24,7 @@ class _HomePState extends State<HomeP> {
         Home(user: widget.user),
         RecipeP(),
         FoodP(user: widget.user),
-        ProfileP()
+        ProfileP(user: widget.user)
       ];
     });
     super.initState();

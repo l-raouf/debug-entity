@@ -61,21 +61,21 @@ deleteTask(String uid, Task task) {
           msg: "something went wrong, check your connection or try later"));
 }
 
-setScore(UserModel user, Task task) {
-    log('handling  ${task}');
-    if (task.checked == true) {
-      user.exp = user.exp! + task.exp!;
-      log('user: ${user.exp}');
-      log('task: ${task.exp}');
-      db
-          .collection("users")
-          .doc(user.uid)
-          .update({"exp": user.exp})
-          .then((value) => Fluttertoast.showToast(
-          msg: "Your score has been updated successfully"))
-          .catchError((error) => Fluttertoast.showToast(
-          msg: "something went wrong, check your connection or try later"));
-    }
+setScore(UserModel user, Future<List<Task>>tasks) async{
+  tasks.then((e){
+    e.forEach((task) async{ user.exp = user.exp! + task.exp!;
+    await db
+        .collection("users")
+        .doc(user.uid)
+        .update({"exp": user.exp})
+        .then((value) => Fluttertoast.showToast(
+    msg: "Your score has been updated successfully"))
+        .catchError((error) => Fluttertoast.showToast(
+    msg: "something went wrong, check your connection or try later")); });
+    resetTask(user.uid!,e);
+  });
+
+
   }
 
 

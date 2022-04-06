@@ -1,10 +1,15 @@
 import 'dart:ui';
 
 import 'package:debug_entity/pages/home/Contactus.dart';
+
+import 'package:debug_entity/models/user-model.dart';
+import 'package:debug_entity/pages/leaderboard/LeaderBoard.dart';
+
 import 'package:flutter/material.dart';
 
 class ProfileP extends StatefulWidget {
-  const ProfileP({Key? key}) : super(key: key);
+  final UserModel user;
+  const ProfileP({Key? key, required this.user}) : super(key: key);
 
   @override
   _ProfilePState createState() => _ProfilePState();
@@ -25,8 +30,8 @@ class _ProfilePState extends State<ProfileP> {
             Container(
               height: screenSize.height * 0.3,
               width: screenSize.width,
-              child: Image.asset(
-                'assets/walidpic.png',
+              child: Image.network(
+                widget.user.picture!,
                 fit: BoxFit.cover,
               ),
             ),
@@ -38,7 +43,8 @@ class _ProfilePState extends State<ProfileP> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ContactUs()),
+                                builder: (context) =>
+                                    ContactUs(user: widget.user)),
                           )
                         },
                     child: Container(
@@ -55,7 +61,7 @@ class _ProfilePState extends State<ProfileP> {
                 alignment: Alignment(0, 2.2),
                 child: CircleAvatar(
                   radius: 80,
-                  backgroundImage: AssetImage('assets/walidpic.png'),
+                  backgroundImage: NetworkImage(widget.user.picture!),
                 ))
           ]),
         ),
@@ -138,42 +144,83 @@ class _ProfilePState extends State<ProfileP> {
               height: screenSize.height * 0.3,
               width: screenSize.width,
               child: Container(
-                  child: ListView.builder(
+                  child: ListView(
+                physics: FixedExtentScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.only(
-                        top: screenSize.height * 0.03,
-                        left: screenSize.width * 0.04),
-                    height: screenSize.height * 0.3,
-                    width: screenSize.width * 0.5,
-                    child: Stack(children: [
-                      Container(
-                        child: Image.asset('assets/Rectangle.png'),
-                      ),
-                      Positioned(
-                        top: 20,
-                        left: 20,
-                        child: Text(
-                          'My Tasks:',
-                          style: TextStyle(color: Colors.white),
+                children: [
+                  InkWell(
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          top: screenSize.height * 0.03,
+                          left: screenSize.width * 0.04),
+                      height: screenSize.height * 0.3,
+                      width: screenSize.width * 0.5,
+                      child: Stack(children: [
+                        Container(
+                          child: Image.asset('assets/Rectangle.png'),
                         ),
-                      ),
-                      Positioned(
-                        top: 40,
-                        left: 30,
-                        child: Text(
-                          '05 Attending',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                        Positioned(
+                          top: 20,
+                          left: 20,
+                          child: Text(
+                            '',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      )
-                    ]),
-                  );
-                },
-                itemCount: 4,
+                        Positioned(
+                          top: 40,
+                          left: 30,
+                          child: Text(
+                            'Edit Profile',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ]),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LeaderBoard()));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          top: screenSize.height * 0.03,
+                          left: screenSize.width * 0.04),
+                      height: screenSize.height * 0.3,
+                      width: screenSize.width * 0.5,
+                      child: Stack(children: [
+                        Container(
+                          child: Image.asset('assets/Rectangle.png'),
+                        ),
+                        Positioned(
+                          top: 20,
+                          left: 20,
+                          child: Text(
+                            '',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        Positioned(
+                          top: 40,
+                          left: 30,
+                          child: Text(
+                            'LeaderBoard',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ]),
+                    ),
+                  ),
+                ],
               )),
             )
           ]),

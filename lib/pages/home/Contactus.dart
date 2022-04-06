@@ -1,3 +1,4 @@
+import 'package:debug_entity/models/user-model.dart';
 import 'package:debug_entity/pages/Profile/ProfileP.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,8 @@ import 'package:hexcolor/hexcolor.dart';
 import '../../services/contactServices.dart';
 
 class ContactUs extends StatefulWidget {
-  const ContactUs({Key? key}) : super(key: key);
+  final UserModel user;
+  const ContactUs({Key? key, required this.user}) : super(key: key);
 
   @override
   _ContactUsState createState() => _ContactUsState();
@@ -36,7 +38,9 @@ class _ContactUsState extends State<ContactUs> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ProfileP()),
+                                  builder: (context) => ProfileP(
+                                        user: widget.user!,
+                                      )),
                             );
                           },
                           child: Text(

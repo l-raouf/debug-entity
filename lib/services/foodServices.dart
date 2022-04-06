@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:debug_entity/models/food-model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 final db = FirebaseFirestore.instance;
@@ -17,7 +18,8 @@ void suggestFood(String title,String category,String ingredient,List tags,String
       .catchError((error) => Fluttertoast.showToast(
       msg: "something went wrong, check your connection or try later"));
 }
-getFoodByCategory(String category){
-  var result=db.collection("food").where('category',isEqualTo: category).limit(10).get();
-  return result;
+Stream<List<FoodModel>>getFoodByCategory(String category){
+  return db.collection("food").where('category',isEqualTo: category).limit(10).snapshots().map((snapshot) =>
+      snapshot.docs.map((doc) =>FoodModel.fromJson(doc.data())
+      ).toList());
 }
