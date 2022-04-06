@@ -228,22 +228,6 @@ class _FoodPState extends State<FoodP> {
                                                                 onPressed: () =>
                                                                     {
                                                                       expAdd =
-                                                                          10
-                                                                    },
-                                                                icon: Icon(Icons
-                                                                    .star)),
-                                                            IconButton(
-                                                                onPressed: () =>
-                                                                    {
-                                                                      expAdd =
-                                                                          20
-                                                                    },
-                                                                icon: Icon(Icons
-                                                                    .star)),
-                                                            IconButton(
-                                                                onPressed: () =>
-                                                                    {
-                                                                      expAdd =
                                                                           30
                                                                     },
                                                                 icon: Icon(Icons

@@ -145,7 +145,6 @@ class _ProfilePState extends State<ProfileP> {
               width: screenSize.width,
               child: Container(
                   child: ListView(
-                physics: FixedExtentScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 children: [
                   InkWell(
