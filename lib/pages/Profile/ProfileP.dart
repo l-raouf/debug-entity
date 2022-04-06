@@ -1,9 +1,11 @@
 import 'dart:ui';
 
-import 'package:debug_entity/models/user-model.dart';
-import 'package:flutter/material.dart';
+import 'package:debug_entity/pages/home/Contactus.dart';
 
-import '../LeaderBoard/LeaderBoard.dart';
+import 'package:debug_entity/models/user-model.dart';
+import 'package:debug_entity/pages/leaderboard/LeaderBoard.dart';
+
+import 'package:flutter/material.dart';
 
 class ProfileP extends StatefulWidget {
   final UserModel user;
@@ -17,8 +19,9 @@ class _ProfilePState extends State<ProfileP> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return SafeArea(
-        child: Container(
+    return Scaffold(
+        body: SafeArea(
+            child: Container(
       child: Column(children: [
         Container(
           height: screenSize.height * 0.3,
@@ -34,17 +37,26 @@ class _ProfilePState extends State<ProfileP> {
             ),
             Positioned(
                 top: 20,
-                left: 20,
-                child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      'Back',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ))),
+                right: 20,
+                child: GestureDetector(
+                    onTap: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ContactUs(user: widget.user)),
+                          )
+                        },
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'Support',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )))),
             Align(
                 alignment: Alignment(0, 2.2),
                 child: CircleAvatar(
@@ -72,13 +84,15 @@ class _ProfilePState extends State<ProfileP> {
                             child: Text(
                               'Goals',
                               style: TextStyle(
-                                  fontSize: 23, fontWeight: FontWeight.bold),
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                           Container(
                             child: Text(
                               '12',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(
+                                  fontSize: 23, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ]),
@@ -92,12 +106,14 @@ class _ProfilePState extends State<ProfileP> {
                           Container(
                             child: Text('Receip',
                                 style: TextStyle(
-                                    fontSize: 23, fontWeight: FontWeight.bold)),
+                                  fontSize: 20,
+                                )),
                           ),
                           Container(
                             child: Text(
                               '24',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(
+                                  fontSize: 23, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ]),
@@ -111,14 +127,14 @@ class _ProfilePState extends State<ProfileP> {
                           Container(
                             child: Text(
                               'Following',
-                              style: TextStyle(
-                                  fontSize: 23, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 20),
                             ),
                           ),
                           Container(
                             child: Text(
                               '98',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(
+                                  fontSize: 23, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ]),
@@ -129,17 +145,17 @@ class _ProfilePState extends State<ProfileP> {
               width: screenSize.width,
               child: Container(
                   child: ListView(
-                    physics: FixedExtentScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      InkWell(
-                        child: Container(
-                    margin: EdgeInsets.only(
+                physics: FixedExtentScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  InkWell(
+                    child: Container(
+                      margin: EdgeInsets.only(
                           top: screenSize.height * 0.03,
                           left: screenSize.width * 0.04),
-                    height: screenSize.height * 0.3,
-                    width: screenSize.width * 0.5,
-                    child: Stack(children: [
+                      height: screenSize.height * 0.3,
+                      width: screenSize.width * 0.5,
+                      child: Stack(children: [
                         Container(
                           child: Image.asset('assets/Rectangle.png'),
                         ),
@@ -162,35 +178,35 @@ class _ProfilePState extends State<ProfileP> {
                                 fontWeight: FontWeight.bold),
                           ),
                         )
-                    ]),
+                      ]),
+                    ),
                   ),
-                      ),
-                       InkWell(
-                         onTap: (){
-                           Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context)=>LeaderBoard())
-                           );
-                         },
-                         child: Container(
-                    margin: EdgeInsets.only(
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LeaderBoard()));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(
                           top: screenSize.height * 0.03,
                           left: screenSize.width * 0.04),
-                    height: screenSize.height * 0.3,
-                    width: screenSize.width * 0.5,
-                    child: Stack(children: [
-                      Container(
+                      height: screenSize.height * 0.3,
+                      width: screenSize.width * 0.5,
+                      child: Stack(children: [
+                        Container(
                           child: Image.asset('assets/Rectangle.png'),
-                      ),
-                      Positioned(
+                        ),
+                        Positioned(
                           top: 20,
                           left: 20,
                           child: Text(
                             '',
                             style: TextStyle(color: Colors.white),
                           ),
-                      ),
-                      Positioned(
+                        ),
+                        Positioned(
                           top: 40,
                           left: 30,
                           child: Text(
@@ -200,16 +216,16 @@ class _ProfilePState extends State<ProfileP> {
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
-                      )
-                    ]),
+                        )
+                      ]),
+                    ),
                   ),
-                       ),
                 ],
               )),
             )
           ]),
         ),
       ]),
-    ));
+    )));
   }
 }

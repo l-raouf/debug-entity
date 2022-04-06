@@ -1,12 +1,11 @@
-
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:debug_entity/models/advice-model.dart';
-import 'package:debug_entity/pages/LeaderBoard/LeaderBoard.dart';
 import 'package:debug_entity/pages/SignIn/SignInP.dart';
 import 'package:debug_entity/pages/Task/FoodP.dart';
 import 'package:debug_entity/pages/botnavbar/HomeP.dart';
+import 'package:debug_entity/pages/leaderboard/LeaderBoard.dart';
 import 'package:debug_entity/pages/recipe/RecipeP.dart';
 import 'package:debug_entity/services/adviceServices.dart';
 
@@ -29,16 +28,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   final double imageHeight = 172;
-  int advLength=0;
+  int advLength = 0;
   final _controler = PageController();
   int rank = 178;
   int food = 12;
   @override
   Widget build(BuildContext context) {
     double lineWidth = MediaQuery.of(context).size.width * 0.9;
-    List<UserModel> listLead=[];
+    List<UserModel> listLead = [];
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -60,7 +58,7 @@ class _HomeState extends State<Home> {
                   IconButton(
                     icon: Icon(Icons.logout),
                     iconSize: 36,
-                    onPressed: (){
+                    onPressed: () {
                       showDialog(
                         context: context,
                         builder: (context) {
@@ -74,7 +72,8 @@ class _HomeState extends State<Home> {
                                 height: 140,
                                 width: 100,
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(
                                       'Are you sure ?',
@@ -85,12 +84,17 @@ class _HomeState extends State<Home> {
                                       ),
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         IconButton(
                                           onPressed: () {
                                             logOutService();
-                                            Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context)=>SignInP()));
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            SignInP()));
                                           },
                                           icon: Icon(
                                             Icons.check,
@@ -135,16 +139,22 @@ class _HomeState extends State<Home> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: 12,),
+                  SizedBox(
+                    height: 12,
+                  ),
                   Container(
                     width: MediaQuery.of(context).size.width,
                     child: Column(
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: [Image.asset('assets/double_comma_top.png')],
+                          children: [
+                            Image.asset('assets/double_comma_top.png')
+                          ],
                         ),
-                        SizedBox(height: 8,),
+                        SizedBox(
+                          height: 8,
+                        ),
                         Column(
                           children: [
                             SizedBox(
@@ -152,19 +162,18 @@ class _HomeState extends State<Home> {
                               child: StreamBuilder<List<AdviceModel>>(
                                   stream: getAdvice(),
                                   builder: (context, snapshot) {
-                                    if(snapshot.hasData){
-                                      final advices=snapshot.data!;
-                                      advLength=advices.length;
+                                    if (snapshot.hasData) {
+                                      final advices = snapshot.data!;
+                                      advLength = advices.length;
                                       return PageView(
                                         controller: _controler,
-                                        children: advices.map(buildAdvice).toList(),
+                                        children:
+                                            advices.map(buildAdvice).toList(),
                                       );
-                                    }else{
+                                    } else {
                                       return Text('No Advices Today');
                                     }
-
-                                  }
-                              ),
+                                  }),
                             ),
                             SmoothPageIndicator(
                               controller: _controler,
@@ -179,17 +188,23 @@ class _HomeState extends State<Home> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 8,),
+                        SizedBox(
+                          height: 8,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: [Image.asset('assets/double_comma_bottom.png')],
+                          children: [
+                            Image.asset('assets/double_comma_bottom.png')
+                          ],
                         ),
                       ],
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 40,),
+              SizedBox(
+                height: 40,
+              ),
               Container(
                 width: lineWidth,
                 child: Column(
@@ -198,16 +213,17 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context)=>LeaderBoard())
-                            );
+                                MaterialPageRoute(
+                                    builder: (context) => LeaderBoard()));
                           },
                           child: Container(
                             child: GestureDetector(
                               child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 32),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -219,7 +235,9 @@ class _HomeState extends State<Home> {
                                         fontSize: 18,
                                       ),
                                     ),
-                                    SizedBox(height: 8,),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
                                     Text(
                                       rank.toString(),
                                       style: TextStyle(
@@ -228,7 +246,9 @@ class _HomeState extends State<Home> {
                                         fontSize: 20,
                                       ),
                                     ),
-                                    SizedBox(height: 24,),
+                                    SizedBox(
+                                      height: 24,
+                                    ),
                                     Icon(
                                       Icons.arrow_right_alt,
                                       color: Colors.white,
@@ -237,8 +257,7 @@ class _HomeState extends State<Home> {
                                   ],
                                 ),
                               ),
-                              onTap: () {
-                              },
+                              onTap: () {},
                             ),
                             width: lineWidth * 0.55,
                             height: imageHeight,
@@ -251,17 +270,18 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context)=>RecipeP())
-                            );
+                                MaterialPageRoute(
+                                    builder: (context) => RecipeP()));
                           },
                           child: Container(
                             child: GestureDetector(
                               onTap: () {},
                               child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 32),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -273,7 +293,9 @@ class _HomeState extends State<Home> {
                                         fontSize: 18,
                                       ),
                                     ),
-                                    SizedBox(height: 8,),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
                                     Text(
                                       food.toString(),
                                       style: TextStyle(
@@ -282,7 +304,9 @@ class _HomeState extends State<Home> {
                                         fontSize: 20,
                                       ),
                                     ),
-                                    SizedBox(height: 24,),
+                                    SizedBox(
+                                      height: 24,
+                                    ),
                                     Icon(
                                       Icons.arrow_right_alt,
                                       color: Colors.white,
@@ -304,13 +328,16 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16,),
+                    SizedBox(
+                      height: 16,
+                    ),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context)=>FoodP(user: widget.user))
-                        );
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    FoodP(user: widget.user)));
                       },
                       child: Container(
                         child: GestureDetector(
@@ -327,7 +354,9 @@ class _HomeState extends State<Home> {
                                     fontSize: 18,
                                   ),
                                 ),
-                                SizedBox(height: 8,),
+                                SizedBox(
+                                  height: 8,
+                                ),
                                 Icon(
                                   Icons.arrow_right_alt,
                                   color: Colors.white,
@@ -357,13 +386,14 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  Widget buildAdvice(AdviceModel advice)=>Center(
-    child: Text(
-      '${advice.body}',
-      style: TextStyle(
-        fontSize: 20,
-        fontFamily: 'Poppins',
-      ),
-    ),
-  );
+
+  Widget buildAdvice(AdviceModel advice) => Center(
+        child: Text(
+          '${advice.body}',
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: 'Poppins',
+          ),
+        ),
+      );
 }

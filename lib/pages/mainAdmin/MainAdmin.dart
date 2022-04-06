@@ -1,35 +1,24 @@
+import 'package:debug_entity/pages/AdminDashboard/AdminDashboard.dart';
+import 'package:debug_entity/pages/AdminFoodValidation/FoodValidation.dart';
 import 'package:debug_entity/pages/Profile/ProfileP.dart';
 import 'package:debug_entity/pages/Task/FoodP.dart';
-import 'package:debug_entity/pages/home/home.dart';
-import 'package:debug_entity/pages/recipe/RecipeP.dart';
+import 'package:debug_entity/pages/adminProfile/AdminProfile.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/user-model.dart';
-
-class HomeP extends StatefulWidget {
-  final UserModel user;
-  const HomeP({Key? key, required this.user}) : super(key: key);
+class MainAdmin extends StatefulWidget {
+  const MainAdmin({Key? key}) : super(key: key);
 
   @override
-  _HomePState createState() => _HomePState();
+  _MainAdminState createState() => _MainAdminState();
 }
 
-class _HomePState extends State<HomeP> {
-  UserModel user = UserModel();
+class _MainAdminState extends State<MainAdmin> {
   int currentIndex = 0;
-  late List screens;
-  void initState() {
-    setState(() {
-      screens = [
-        Home(user: widget.user),
-        RecipeP(),
-        FoodP(user: widget.user),
-        ProfileP(user: widget.user)
-      ];
-    });
-    super.initState();
-  }
-
+  final screens = [
+    AdminDashboard(),
+    FoodValidation(),
+    AdminProfile(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +34,6 @@ class _HomePState extends State<HomeP> {
               currentIndex = index;
             });
           },
-          backgroundColor: Color.fromARGB(255, 9, 12, 13),
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -53,11 +41,11 @@ class _HomePState extends State<HomeP> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.receipt_long),
-              label: 'Receip',
+              label: 'Validation',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.lock_clock),
-              label: 'Tasks',
+              icon: Icon(Icons.message),
+              label: 'Messages',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
