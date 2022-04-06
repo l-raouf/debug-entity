@@ -33,9 +33,9 @@ void signUpService(String email, String password, String username,context) async
     await db
         .collection("users")
         .doc(user!.uid)
-        .set({"uid": user.uid, "username": username, "email": email,"exp":0,"picture":"LINK TO ADD"});
+        .set({"uid": user.uid, "username": username, "email": email,"exp":0,"picture":"Profile.png"});
     Fluttertoast.showToast(msg: "account created successfully");
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context)=>HomeP(user: UserModel(email: email,uid: user.uid,picture: "Link TO ADD",exp: 0,username: username))));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context)=>HomeP(user: UserModel(email: email,uid: user.uid,picture: "Profile.png",exp: 0,username: username))));
   }).catchError((e) {
     Fluttertoast.showToast(msg: e.message);
   });

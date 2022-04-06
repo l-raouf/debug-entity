@@ -85,8 +85,7 @@ class _FoodPState extends State<FoodP> {
                                     )),
                                 Align(
                                   alignment: Alignment(0, -2.0),
-                                  child: Image.asset(
-                                      'assets/images/hilalremoved.png'),
+                                  child: Image.asset('assets/hilalremoved.png'),
                                 ),
                                 Dialog(
                                     shape: RoundedRectangleBorder(
@@ -343,8 +342,8 @@ class _FoodPState extends State<FoodP> {
                                   BorderRadius.all(Radius.circular(20))),
                           child: TextButton(
                             onPressed: (() {
-                              var list=getTask(widget.user.uid!);
-                              setScore(widget.user, list);
+                              var list=getTaskChecked(widget.user.uid!);
+                              list.map((Plan) => Plan.forEach((element) {setScore(widget.user, element);}));
                             }),
                             child: Text(
                               'Validate',

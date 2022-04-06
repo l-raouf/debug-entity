@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import '../../services/contactServices.dart';
+
 class ContactUs extends StatefulWidget {
   const ContactUs({Key? key}) : super(key: key);
 
@@ -10,10 +11,10 @@ class ContactUs extends StatefulWidget {
 }
 
 class _ContactUsState extends State<ContactUs> {
-  final _formkey= GlobalKey<FormState>();
-  final TextEditingController emailController= new TextEditingController();
-  final TextEditingController titleController=new TextEditingController();
-  final TextEditingController bodyController=new TextEditingController();
+  final _formkey = GlobalKey<FormState>();
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController titleController = new TextEditingController();
+  final TextEditingController bodyController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +31,7 @@ class _ContactUsState extends State<ContactUs> {
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(12, 4, 0, 0),
                         child: TextButton(
-                          onPressed: (){},
+                          onPressed: () {},
                           child: Text(
                             'Back',
                             style: TextStyle(
@@ -94,8 +95,8 @@ class _ContactUsState extends State<ContactUs> {
                                 ),
                                 controller: emailController,
                                 keyboardType: TextInputType.emailAddress,
-                                onSaved: (value){
-                                  emailController.text=value!;
+                                onSaved: (value) {
+                                  emailController.text = value!;
                                 },
                                 validator: (String? value) {
                                   if (value == null || value.isEmpty) {
@@ -113,8 +114,8 @@ class _ContactUsState extends State<ContactUs> {
                                 ),
                                 controller: titleController,
                                 keyboardType: TextInputType.text,
-                                onSaved: (value){
-                                  titleController.text=value!;
+                                onSaved: (value) {
+                                  titleController.text = value!;
                                 },
                                 validator: (String? value) {
                                   if (value == null || value.isEmpty) {
@@ -133,8 +134,8 @@ class _ContactUsState extends State<ContactUs> {
                                   hintText: 'Message',
                                 ),
                                 controller: bodyController,
-                                onSaved: (value){
-                                  bodyController.text=value!;
+                                onSaved: (value) {
+                                  bodyController.text = value!;
                                 },
                                 validator: (String? value) {
                                   if (value == null || value.isEmpty) {
@@ -234,5 +235,3 @@ class _ContactUsState extends State<ContactUs> {
     );
   }
 }
-
-

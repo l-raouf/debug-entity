@@ -1,7 +1,4 @@
-import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:debug_entity/pages/LeaderBoard/LeaderBoard.dart';
 import 'package:debug_entity/pages/Profile/ProfileP.dart';
 import 'package:debug_entity/pages/Task/FoodP.dart';
 import 'package:debug_entity/pages/home/home.dart';
@@ -24,7 +21,7 @@ class _HomePState extends State<HomeP> {
   late List screens;
   void initState() {
     setState(() {
-      screens = [Home(user: widget.user), RecipeP(), FoodP(user: widget.user), ProfileP()];
+      screens = [Home(user: widget.user),  RecipeP(), FoodP(user: widget.user),  ProfileP()];
     });
     super.initState();
   }
@@ -59,7 +56,7 @@ class _HomePState extends State<HomeP> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Tasks',
+              label: 'Profile',
             ),
           ]),
     );

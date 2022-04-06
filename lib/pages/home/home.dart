@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:debug_entity/models/advice-model.dart';
 import 'package:debug_entity/pages/SignIn/SignInP.dart';
 import 'package:debug_entity/services/adviceServices.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';

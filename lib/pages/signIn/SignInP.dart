@@ -1,7 +1,6 @@
-import 'dart:developer';
 
 import 'package:debug_entity/pages/Register/RegisterP.dart';
-import 'package:debug_entity/pages/botnavbar/HomeP.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../services/authServices.dart';
@@ -28,7 +27,7 @@ class _SignInPState extends State<SignInP> {
         ),
         Align(
             alignment: Alignment(0.0, -1),
-            child: Image(image: AssetImage('assets/images/hilal2.jpg'))),
+            child: Image(image: AssetImage('assets/hilal2.jpg'))),
         Align(
             alignment: Alignment(0.0, 0.99),
             child: Container(
