@@ -2,6 +2,7 @@ import 'package:debug_entity/pages/AdminDashboard/AdminDashboard.dart';
 import 'package:debug_entity/pages/AdminFoodValidation/FoodValidation.dart';
 import 'package:debug_entity/pages/SignIn/SignInP.dart';
 import 'package:debug_entity/pages/leaderboard/LeaderBoard.dart';
+import 'package:debug_entity/pages/mainAdmin/MainAdmin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: FoodValidation(),
+    home: MainAdmin(),
   ));
 /*
 import 'package:debug_entity/pages/Profile/ProfileP.dart';
