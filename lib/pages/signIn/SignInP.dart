@@ -1,4 +1,4 @@
-import 'package:debug_entity/pages/Register/RegisterP.dart';
+import 'package:debug_entity/pages/register/RegisterP.dart';
 import 'package:flutter/material.dart';
 
 class SignInP extends StatefulWidget {
@@ -20,7 +20,7 @@ class _SignInPState extends State<SignInP> {
         ),
         Align(
             alignment: Alignment(0.0, -1),
-            child: Image(image: AssetImage('assets/images/hilal2.jpg'))),
+            child: Image(image: AssetImage('assets/hilal2.jpg'))),
         Align(
             alignment: Alignment(0.0, 0.99),
             child: Container(

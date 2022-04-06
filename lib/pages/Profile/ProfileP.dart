@@ -24,7 +24,7 @@ class _ProfilePState extends State<ProfileP> {
               height: screenSize.height * 0.3,
               width: screenSize.width,
               child: Image.asset(
-                'assets/images/walidpic.png',
+                'assets/walidpic.png',
                 fit: BoxFit.cover,
               ),
             ),
@@ -45,7 +45,7 @@ class _ProfilePState extends State<ProfileP> {
                 alignment: Alignment(0, 2.2),
                 child: CircleAvatar(
                   radius: 80,
-                  backgroundImage: AssetImage('assets/images/walidpic.png'),
+                  backgroundImage: AssetImage('assets/walidpic.png'),
                 ))
           ]),
         ),
@@ -135,7 +135,7 @@ class _ProfilePState extends State<ProfileP> {
                     width: screenSize.width * 0.5,
                     child: Stack(children: [
                       Container(
-                        child: Image.asset('assets/images/Rectangle.png'),
+                        child: Image.asset('assets/Rectangle.png'),
                       ),
                       Positioned(
                         top: 20,

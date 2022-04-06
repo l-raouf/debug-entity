@@ -1,7 +1,7 @@
-import 'package:debug_entity/pages/LeaderBoard/LeaderBoard.dart';
 import 'package:debug_entity/pages/Profile/ProfileP.dart';
-import 'package:debug_entity/pages/Task/FoodP.dart';
+import 'package:debug_entity/pages/leaderboard/LeaderBoard.dart';
 import 'package:debug_entity/pages/recipe/RecipeP.dart';
+import 'package:debug_entity/pages/task/FoodP.dart';
 import 'package:flutter/material.dart';
 
 class HomeP extends StatefulWidget {
