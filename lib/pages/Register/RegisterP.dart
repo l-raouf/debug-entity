@@ -1,4 +1,4 @@
-
+import 'package:debug_entity/pages/SignIn/SignInP.dart';
 import 'package:debug_entity/pages/SignIn/SignInP.dart';
 
 import 'package:flutter/material.dart';
@@ -13,11 +13,11 @@ class RegisterP extends StatefulWidget {
 }
 
 class _RegisterPState extends State<RegisterP> {
-  final GlobalKey<FormState> _formkey= GlobalKey<FormState>();
-  final TextEditingController usernameController= TextEditingController();
-  final TextEditingController emailController= TextEditingController();
-  final TextEditingController passwordController= TextEditingController();
-  final TextEditingController password2Controller= TextEditingController();
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController password2Controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -33,7 +33,7 @@ class _RegisterPState extends State<RegisterP> {
         Align(
           alignment: Alignment(0.0, 1.2),
           child: Form(
-            key:_formkey,
+            key: _formkey,
             child: Container(
               width: screenSize.width * 0.8,
               height: screenSize.height * 0.8,
@@ -56,8 +56,8 @@ class _RegisterPState extends State<RegisterP> {
                         child: Text('UserName :')),
                     TextFormField(
                       controller: usernameController,
-                      onSaved: (value){
-                        usernameController.text=value!;
+                      onSaved: (value) {
+                        usernameController.text = value!;
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -77,11 +77,12 @@ class _RegisterPState extends State<RegisterP> {
                   margin: EdgeInsets.only(top: 10),
                   child: Column(children: [
                     Align(
-                        alignment: Alignment(-0.90, 0.0), child: Text('Email:')),
+                        alignment: Alignment(-0.90, 0.0),
+                        child: Text('Email:')),
                     TextFormField(
                       controller: emailController,
-                      onSaved: (value){
-                        emailController.text=value!;
+                      onSaved: (value) {
+                        emailController.text = value!;
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -105,11 +106,13 @@ class _RegisterPState extends State<RegisterP> {
                         child: Text('Password:')),
                     TextFormField(
                       controller: passwordController,
-                      onSaved: (value){
-                        passwordController.text=value!;
+                      onSaved: (value) {
+                        passwordController.text = value!;
                       },
                       validator: (value) {
-                        if (value == null || value.isEmpty||value.length<6) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            value.length < 6) {
                           return 'Please enter a valid password';
                         }
                         return null;
@@ -130,11 +133,13 @@ class _RegisterPState extends State<RegisterP> {
                         child: Text('Confirm Your Password:')),
                     TextFormField(
                       controller: password2Controller,
-                      onSaved: (value){
-                        password2Controller.text=value!;
+                      onSaved: (value) {
+                        password2Controller.text = value!;
                       },
                       validator: (value) {
-                        if (value == null || value.isEmpty ||value!=passwordController.text) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            value != passwordController.text) {
                           return 'verify your password please';
                         }
                         return null;
@@ -156,10 +161,14 @@ class _RegisterPState extends State<RegisterP> {
                         borderRadius: BorderRadius.all(Radius.circular(100))),
                     child: TextButton(
                         onPressed: () {
-                          if(!_formkey.currentState!.validate()){
+                          if (!_formkey.currentState!.validate()) {
                             return;
                           }
-                          signUpService(emailController.text,passwordController.text,usernameController.text,context);
+                          signUpService(
+                              emailController.text,
+                              passwordController.text,
+                              usernameController.text,
+                              context);
                         },
                         child: Text('Register',
                             style: TextStyle(

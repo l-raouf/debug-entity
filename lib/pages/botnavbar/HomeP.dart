@@ -1,4 +1,3 @@
-
 import 'package:debug_entity/pages/Profile/ProfileP.dart';
 import 'package:debug_entity/pages/Task/FoodP.dart';
 import 'package:debug_entity/pages/home/home.dart';
@@ -16,15 +15,21 @@ class HomeP extends StatefulWidget {
 }
 
 class _HomePState extends State<HomeP> {
-  UserModel user=UserModel();
+  UserModel user = UserModel();
   int currentIndex = 0;
   late List screens;
   void initState() {
     setState(() {
-      screens = [Home(user: widget.user),  RecipeP(), FoodP(user: widget.user),  ProfileP()];
+      screens = [
+        Home(user: widget.user),
+        RecipeP(),
+        FoodP(user: widget.user),
+        ProfileP()
+      ];
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

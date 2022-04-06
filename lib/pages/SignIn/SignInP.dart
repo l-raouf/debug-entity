@@ -1,4 +1,3 @@
-
 import 'package:debug_entity/pages/Register/RegisterP.dart';
 
 import 'package:flutter/material.dart';
@@ -13,9 +12,9 @@ class SignInP extends StatefulWidget {
 }
 
 class _SignInPState extends State<SignInP> {
-  final GlobalKey<FormState> _formkey= GlobalKey<FormState>();
-  final TextEditingController emailController= TextEditingController();
-  final TextEditingController passwordController= TextEditingController();
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -40,7 +39,8 @@ class _SignInPState extends State<SignInP> {
                     Container(
                         child: Text(
                       'Login',
-                      style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                     )),
                     Container(
                         margin: EdgeInsets.only(top: 10),
@@ -55,8 +55,8 @@ class _SignInPState extends State<SignInP> {
                             child: Text('Email:')),
                         TextFormField(
                           controller: emailController,
-                          onSaved: (value){
-                            emailController.text=value!;
+                          onSaved: (value) {
+                            emailController.text = value!;
                           },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -81,8 +81,8 @@ class _SignInPState extends State<SignInP> {
                               child: Text('Password:')),
                           TextFormField(
                             controller: passwordController,
-                            onSaved: (value){
-                              passwordController.text=value!;
+                            onSaved: (value) {
+                              passwordController.text = value!;
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -94,7 +94,6 @@ class _SignInPState extends State<SignInP> {
                               labelText: 'Put Your Password',
                               border: OutlineInputBorder(),
                             ),
-
                             keyboardType: TextInputType.visiblePassword,
                           )
                         ])),
@@ -112,13 +111,15 @@ class _SignInPState extends State<SignInP> {
                         width: 300,
                         decoration: BoxDecoration(
                             color: Color.fromARGB(255, 184, 135, 53),
-                            borderRadius: BorderRadius.all(Radius.circular(100))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(100))),
                         child: TextButton(
                             onPressed: () {
-                                if(!_formkey.currentState!.validate()){
-                                  return;
-                                }
-                                signInService(emailController.text,passwordController.text,context);
+                              if (!_formkey.currentState!.validate()) {
+                                return;
+                              }
+                              signInService(emailController.text,
+                                  passwordController.text, context);
                             },
                             child: Text('Login',
                                 style: TextStyle(
