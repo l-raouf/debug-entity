@@ -7,7 +7,6 @@ editProfile(UserModel user){
   db.collection("users").doc(user.uid).update({
     "username":user.username,
     "email":user.email,
-    "category":user.category,
     "picture":user.picture,
   }).then((value) => Fluttertoast.showToast(
       msg: "Your information has been updated successfully"))

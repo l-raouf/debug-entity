@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:debug_entity/models/user-model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -5,63 +7,99 @@ import '../models/planning-model.dart';
 
 final db = FirebaseFirestore.instance;
 
-createPlanning(String uid, Map<String, dynamic> tasks) {
+createPlanning(String uid, String name, int exp) {
   var collectionRoot = db.collection("users").doc(uid);
   var id = collectionRoot.collection("planning").doc().id;
   collectionRoot
       .collection("planning")
       .doc(id)
-      .set(tasks)
+      .set({"id": id, "exp": exp, "taskName": name, "checked": false})
       .then((value) => Fluttertoast.showToast(
-          msg:
-              "Your planning has been added successfully, you can check it out"))
+          msg: "Your Task has been added successfully, you can check it out"))
       .catchError((error) => Fluttertoast.showToast(
           msg: "something went wrong, check your connection or try later"));
 }
 
-updatePlanning(String uid, PlanningModel plan) {
+updateTask(String uid, Task task) {
   db
       .collection("users")
       .doc(uid)
       .collection("planning")
-      .doc(plan.id)
-      .update({'tasks': plan.tasks})
+      .doc(task.id)
+      .update({'checked': task.checked})
       .then((value) => Fluttertoast.showToast(
-          msg: "Your planning has been updated successfully"))
+          msg: "Your Task has been updated successfully"))
       .catchError((error) => Fluttertoast.showToast(
           msg: "something went wrong, check your connection or try later"));
 }
 
-setScore(UserModel user, List<Task> tasks) {
-  if (tasks == []) {
-    return;
-  } else {
-    for (var element in tasks) {
-      user.exp = user.exp! + element.exp!;
-    }
-    db.collection("users").doc(user.uid).update({"exp": user.exp}).then((value) => Fluttertoast.showToast(
-        msg: "Your score has been updated successfully"))
+resetTask(String uid, List<Task> plan) {
+  plan.forEach((element) {
+    db
+        .collection("users")
+        .doc(uid)
+        .collection("planning")
+        .doc(element.id)
+        .update({'checked': false})
+        .then((value) => Fluttertoast.showToast(
+            msg: "Your planning has been reset successfully"))
         .catchError((error) => Fluttertoast.showToast(
-        msg: "something went wrong, check your connection or try later"));;
-  }
+            msg: "something went wrong, check your connection or try later"));
+  });
 }
 
-getPlanning(String uid, String id) {
-  PlanningModel plan = PlanningModel();
+deleteTask(String uid, Task task) {
   db
       .collection("users")
       .doc(uid)
       .collection("planning")
-      .doc(id)
-      .get()
-      .then((doc) => {
-            doc.data()?.forEach((key, value) {
-              if (key == "id") {
-                plan.id = value;
-              } else {
-                plan.tasks = value;
-              }
-            })
-          });
-  return plan;
+      .doc(task.id)
+      .delete()
+      .then((value) => Fluttertoast.showToast(
+          msg: "Your task has been deleted successfully"))
+      .catchError((error) => Fluttertoast.showToast(
+          msg: "something went wrong, check your connection or try later"));
 }
+
+setScore(UserModel user, Task task) {
+    log('handling  ${task}');
+    if (task.checked == true) {
+      user.exp = user.exp! + task.exp!;
+      log('user: ${user.exp}');
+      log('task: ${task.exp}');
+      db
+          .collection("users")
+          .doc(user.uid)
+          .update({"exp": user.exp})
+          .then((value) => Fluttertoast.showToast(
+          msg: "Your score has been updated successfully"))
+          .catchError((error) => Fluttertoast.showToast(
+          msg: "something went wrong, check your connection or try later"));
+    }
+  }
+
+
+
+Stream<List<Task>> getTask(String uid) => db
+    .collection("users")
+    .doc(uid)
+    .collection("planning")
+    .snapshots()
+    .map((snapshot) =>
+        snapshot.docs.map((doc) => Task.fromJson(doc.data())).toList());
+Stream<List<Task>> getTaskChecked(String uid) => db
+    .collection("users")
+    .doc(uid)
+    .collection("planning")
+    .where("checked", isEqualTo: true)
+    .snapshots()
+    .map((snapshot) =>
+        snapshot.docs.map((doc) => Task.fromJson(doc.data())).toList());
+Stream<List<Task>> getTaskNotChecked(String uid) => db
+    .collection("users")
+    .doc(uid)
+    .collection("planning")
+    .where("checked", isEqualTo: false)
+    .snapshots()
+    .map((snapshot) =>
+        snapshot.docs.map((doc) => Task.fromJson(doc.data())).toList());
