@@ -33,9 +33,9 @@ void signUpService(String email, String password, String username,context) async
     await db
         .collection("users")
         .doc(user!.uid)
-        .set({"uid": user.uid, "username": username, "email": email,"exp":0,"picture":"Profile.png"});
+        .set({"uid": user.uid, "username": username, "email": email,"exp":0,"picture":"https://firebasestorage.googleapis.com/v0/b/debug-entity-8c103.appspot.com/o/Profile%2FProfile.png?alt=media&token=2bb3a3b1-cb94-491e-b68c-7c92d026e834"});
     Fluttertoast.showToast(msg: "account created successfully");
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context)=>HomeP(user: UserModel(email: email,uid: user.uid,picture: "Profile.png",exp: 0,username: username))));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context)=>HomeP(user: UserModel(email: email,uid: user.uid,picture: "https://firebasestorage.googleapis.com/v0/b/debug-entity-8c103.appspot.com/o/Profile%2FProfile.png?alt=media&token=2bb3a3b1-cb94-491e-b68c-7c92d026e834",exp: 0,username: username))));
   }).catchError((e) {
     Fluttertoast.showToast(msg: e.message);
   });

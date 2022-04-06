@@ -21,7 +21,7 @@ class _HomePState extends State<HomeP> {
   late List screens;
   void initState() {
     setState(() {
-      screens = [Home(user: widget.user),  RecipeP(), FoodP(user: widget.user),  ProfileP()];
+      screens = [Home(user: widget.user),  RecipeP(), FoodP(user: widget.user),  ProfileP(user: widget.user)];
     });
     super.initState();
   }
@@ -61,4 +61,5 @@ class _HomePState extends State<HomeP> {
           ]),
     );
   }
+
 }
