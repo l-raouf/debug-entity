@@ -1,20 +1,33 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:debug_entity/pages/LeaderBoard/LeaderBoard.dart';
 import 'package:debug_entity/pages/Profile/ProfileP.dart';
 import 'package:debug_entity/pages/Task/FoodP.dart';
+import 'package:debug_entity/pages/home/home.dart';
 import 'package:debug_entity/pages/recipe/RecipeP.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/user-model.dart';
+
 class HomeP extends StatefulWidget {
-  const HomeP({Key? key}) : super(key: key);
+  final UserModel user;
+  const HomeP({Key? key, required this.user}) : super(key: key);
 
   @override
   _HomePState createState() => _HomePState();
 }
 
 class _HomePState extends State<HomeP> {
+  UserModel user=UserModel();
   int currentIndex = 0;
-  final screens = [LeaderBoard(), RecipeP(), FoodP(), ProfileP()];
-
+  late List screens;
+  void initState() {
+    setState(() {
+      screens = [Home(user: widget.user), RecipeP(), FoodP(user: widget.user), ProfileP()];
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

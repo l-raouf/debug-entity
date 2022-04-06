@@ -1,17 +1,28 @@
+import 'dart:developer';
+
+import 'package:debug_entity/models/planning-model.dart';
+import 'package:debug_entity/models/user-model.dart';
+import 'package:debug_entity/services/planningServices.dart';
 import 'package:flutter/material.dart';
 
 class FoodP extends StatefulWidget {
-  const FoodP({Key? key}) : super(key: key);
+  final UserModel user;
+  const FoodP({Key? key, required this.user}) : super(key: key);
 
   @override
   _FoodPState createState() => _FoodPState();
 }
 
 class _FoodPState extends State<FoodP> {
+  final _formKey=GlobalKey<FormState>();
+  final _controler = PageController();
+  TextEditingController taskName=TextEditingController();
+  @override
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    var tasksLeft = [];
+    var expAdd = 0;
     return SafeArea(
         child: Container(
       child: SingleChildScrollView(
@@ -88,21 +99,33 @@ class _FoodPState extends State<FoodP> {
                                           child: Stack(children: [
                                             Column(children: [
                                               Container(
-                                                margin:
-                                                    EdgeInsets.only(top: 20),
-                                                child: Text(
-                                                  'Add Task',
-                                                  style: TextStyle(
-                                                      fontSize: 25,
-                                                      fontWeight:
-                                                          FontWeight.w800),
-                                                ),
+                                              margin:
+                                                  EdgeInsets.only(top: 20),
+                                              child: Text(
+                                                'Add Task',
+                                                style: TextStyle(
+                                                    fontSize: 25,
+                                                    fontWeight:
+                                                        FontWeight.w800),
                                               ),
-                                              Container(
-                                                margin: EdgeInsets.all(20),
-                                                child: TextField(
-                                                  decoration: InputDecoration(
-                                                      label: Text('Title')),
+                                                ),
+                                              Form(
+                                                key: _formKey,
+                                                child: Container(
+                                                  margin: EdgeInsets.all(20),
+                                                  child: TextFormField(
+                                                    controller: taskName,
+                                                    onSaved: (value){
+                                                      taskName.text=value!;
+                                                    },
+                                                    validator: (value){
+                                                      if(value==Null || value=="") {
+                                                        return "You need to provide a task";
+                                                      }
+                                                    },
+                                                    decoration: InputDecoration(
+                                                        label: Text('Title')),
+                                                  ),
                                                 ),
                                               ),
                                               Container(
@@ -160,8 +183,7 @@ class _FoodPState extends State<FoodP> {
                                                                           Radius.circular(
                                                                               20))),
                                                               child: TextButton(
-                                                                onPressed:
-                                                                    (() {}),
+                                                                onPressed: () {  },
                                                                 child: Text(
                                                                   'Sport',
                                                                   style: TextStyle(
@@ -192,11 +214,31 @@ class _FoodPState extends State<FoodP> {
                                                         margin: EdgeInsets.only(
                                                             right: 20),
                                                         child: Row(children: [
-                                                          Icon(Icons.star),
-                                                          Icon(Icons.star),
-                                                          Icon(Icons.star),
-                                                          Icon(Icons.star),
-                                                          Icon(Icons.star),
+                                                          IconButton(
+                                                              onPressed: () =>
+                                                                  {expAdd = 10},
+                                                              icon: Icon(
+                                                                  Icons.star)),
+                                                          IconButton(
+                                                              onPressed: () =>
+                                                                  {expAdd = 20},
+                                                              icon: Icon(
+                                                                  Icons.star)),
+                                                          IconButton(
+                                                              onPressed: () =>
+                                                                  {expAdd=30},
+                                                              icon: Icon(
+                                                                  Icons.star)),
+                                                          IconButton(
+                                                              onPressed: () =>
+                                                                  {expAdd=40},
+                                                              icon: Icon(
+                                                                  Icons.star)),
+                                                          IconButton(
+                                                              onPressed: () =>
+                                                                  {expAdd=50},
+                                                              icon: Icon(
+                                                                  Icons.star)),
                                                         ]),
                                                       )
                                                     ]),
@@ -214,8 +256,14 @@ class _FoodPState extends State<FoodP> {
                                                               Radius.circular(
                                                                   100))),
                                                   child: TextButton(
-                                                      onPressed: () {},
-                                                      child: Text('Add',
+                                                          onPressed: () {
+                                                            if(!_formKey.currentState!.validate()){
+                                                              return;
+                                                            }else{
+                                                              createPlanning(widget.user.uid!,taskName.text,expAdd);
+                                                            }
+                                                        },
+                                                        child: Text('Add',
                                                           style: TextStyle(
                                                             fontSize: 20,
                                                             color: Colors.white,
@@ -250,60 +298,22 @@ class _FoodPState extends State<FoodP> {
               Container(
                 width: screenSize.width,
                 height: screenSize.height * 0.35,
-                child: ListView.builder(
-                    itemCount: 8,
-                    physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(25),
-                                bottomLeft: Radius.circular(15),
-                                topRight: Radius.circular(25)),
-                            gradient: LinearGradient(
-                                begin: index % 2 == 0
-                                    ? Alignment.centerRight
-                                    : Alignment.centerLeft,
-                                end: index % 2 == 0
-                                    ? Alignment.centerLeft
-                                    : Alignment.centerRight,
-                                colors: [
-                                  Color.fromARGB(255, 255, 232, 197),
-                                  Color.fromARGB(255, 228, 169, 81),
-                                ])),
-                        height: 58,
-                        width: screenSize.width * 0.3,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                  margin: EdgeInsets.only(left: 15),
-                                  child: Text(
-                                    'task1',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 18),
-                                  )),
-                              Container(
-                                  margin: EdgeInsets.only(right: 10),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.done,
-                                        color: Colors.green,
-                                      ),
-                                      Container(
-                                        width: 5,
-                                      ),
-                                      Icon(
-                                        Icons.close,
-                                        color: Colors.red,
-                                      )
-                                    ],
-                                  ))
-                            ]),
-                      );
-                    }),
+                child:StreamBuilder<List<Task>>(
+                    stream: getTaskNotChecked(widget.user.uid!),
+                    builder: (context, snapshot) {
+                      if(snapshot.hasData){
+                        var index=0;
+                        final tasks=snapshot.data!;
+                        return ListView(
+                            controller: _controler,
+                            children: tasks.map(CompletedTask).toList()
+                        );
+                      }else{
+                        return Text('No tasks Left');
+                      }
+
+                    }
+                ),
               )
             ]),
           ),
@@ -332,7 +342,10 @@ class _FoodPState extends State<FoodP> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20))),
                           child: TextButton(
-                            onPressed: (() {}),
+                            onPressed: (() {
+                              var list=getTask(widget.user.uid!);
+                              setScore(widget.user, list);
+                            }),
                             child: Text(
                               'Validate',
                               style:
@@ -348,43 +361,21 @@ class _FoodPState extends State<FoodP> {
                   width: screenSize.width * 0.6,
                   height: screenSize.height * 0.4,
                   margin: EdgeInsets.only(top: 0, left: 10, right: 10),
-                  child: ListView.builder(
-                      physics: BouncingScrollPhysics(),
-                      itemCount: 8,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(25),
-                                  bottomLeft: Radius.circular(15),
-                                  topRight: Radius.circular(25)),
-                              color: Color.fromARGB(255, 234, 234, 233)),
-                          width: screenSize.width * 0.5,
-                          height: 40,
-                          margin: EdgeInsets.only(top: 10),
-                          child: Container(
-                              child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 15),
-                                child: Text(
-                                  'Completed Task 1',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ),
-                              Container(
-                                  margin: EdgeInsets.only(right: 5),
-                                  child: IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.close,
-                                        color: Colors.red,
-                                      )))
-                            ],
-                          )),
+                  child:StreamBuilder<List<Task>>(
+                    stream: getTaskChecked(widget.user.uid!),
+                    builder: (context, snapshot) {
+                      if(snapshot.hasData){
+                        final tasks=snapshot.data!;
+                        return ListView(
+                            controller: _controler,
+                            children: tasks.map(toDoTask).toList()
                         );
-                      }),
+                      }else{
+                        return Text('No tasks Left');
+                      }
+
+                    }
+                ),
                 ),
               )
             ]),
@@ -393,4 +384,100 @@ class _FoodPState extends State<FoodP> {
       ),
     ));
   }
+  Widget CompletedTask(Task task)=>Container(
+      margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(25),
+              bottomLeft: Radius.circular(15),
+              topRight: Radius.circular(25)),
+          gradient: LinearGradient(
+              begin: 1 % 2 == 0
+                  ? Alignment.centerRight
+                  : Alignment.centerLeft,
+              end: 1 % 2 == 0
+                  ? Alignment.centerLeft
+                  : Alignment.centerRight,
+              colors: [
+                Color.fromARGB(255, 255, 232, 197),
+                Color.fromARGB(255, 228, 169, 81),
+              ])),
+      height: 58,
+      width: MediaQuery.of(context).size.width * 0.3,
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+                margin: EdgeInsets.only(left: 15),
+                child: Text(
+                  '${task.taskName}',
+                  style: TextStyle(
+                      color: Colors.black, fontSize: 18),
+                )),
+            Container(
+                margin: EdgeInsets.only(right: 10),
+                child: Row(
+                  children: [
+                    IconButton(onPressed: (){
+                      task.checked=true;
+                      updateTask(widget.user.uid!,task);
+                    }, icon:Icon(
+                      Icons.done,
+                      color: Colors.green,
+                    ), ),
+
+                    Container(
+                      width: 5,
+                    ),
+                    IconButton(
+                      onPressed: (){
+                        deleteTask(widget.user.uid!,task);
+                      },
+                      icon: Icon(
+                        Icons.close,
+                        color: Colors.red,
+                      ),
+                    )
+
+                  ],
+                ))
+          ]),
+    );
+
+  Widget toDoTask (Task task)=> Container(
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(15),
+            topRight: Radius.circular(25)),
+        color: Color.fromARGB(255, 234, 234, 233)),
+    width: MediaQuery.of(context).size.width * 0.5,
+    height: 40,
+    margin: EdgeInsets.only(top: 10),
+    child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 15),
+              child: Text(
+                '${task.taskName}',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+            Container(
+                margin: EdgeInsets.only(right: 5),
+                child: IconButton(
+                    onPressed: () {
+                      task.checked=false;
+                      updateTask(widget.user.uid!, task);
+                    },
+                    icon: Icon(
+                      Icons.close,
+                      color: Colors.red,
+                    )))
+          ],
+        )),
+  );
+
 }

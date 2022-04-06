@@ -3,7 +3,6 @@ class UserModel {
   String? username;
   String? uid;
   int? exp;
-  String? category;
   String? picture;
 
   UserModel(
@@ -11,6 +10,14 @@ class UserModel {
       this.username,
       this.uid,
       this.exp,
-      this.category,
       this.picture});
+  factory UserModel.fromMap(map){
+    return UserModel(
+      email: map['email'],
+      username: map['username'],
+      uid:map['uid'],
+      exp: map['exp'],
+      picture: map['picture']
+    );
+  }
 }

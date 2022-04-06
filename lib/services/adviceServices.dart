@@ -17,7 +17,7 @@ void suggestAdvice(String category, String body) async {
       .catchError((error) => Fluttertoast.showToast(
           msg: "something went wrong, check your connection or try later"));
 }
- Stream<List<AdviceModel>>getAdvice() =>
+Stream<List<AdviceModel>>getAdvice() =>
   db.collection("advices").limit(2).snapshots().map((snapshot) =>
     snapshot.docs.map((doc) =>AdviceModel.fromJson(doc.data())
     ).toList()

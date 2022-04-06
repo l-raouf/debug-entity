@@ -1,12 +1,13 @@
-class PlanningModel {
-  String? id;
-  List<Task>? tasks;//[{task:string,exp;int},{task:string,exp;int}]
-
-  PlanningModel({this.id, this.tasks});
-}
 class Task{
+  String? id;
   String? taskName;
   int? exp;
   bool? checked;
-  Task({this.taskName,this.exp});
+  Task({this.id,this.taskName,this.exp,this.checked});
+  static Task fromJson(Map<String,dynamic>json)=>Task(
+    id: json['id'],
+    taskName: json['taskName'],
+    exp: json['exp'],
+    checked: json['checked']
+  );
 }

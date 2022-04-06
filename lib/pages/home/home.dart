@@ -1,26 +1,33 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:debug_entity/models/advice-model.dart';
+import 'package:debug_entity/pages/SignIn/SignInP.dart';
 import 'package:debug_entity/services/adviceServices.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../models/user-model.dart';
+import '../../services/authServices.dart';
+
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final UserModel user;
+  const Home({Key? key, required this.user}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+
   final double imageHeight = 172;
   int advLength=0;
   final _controler = PageController();
   int rank = 178;
   int food = 12;
-  @override
 
 
   @override
@@ -37,7 +44,7 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Hello, user',
+                    'Hello, ${widget.user.username ?? "..."}',
                     style: TextStyle(
                       color: Colors.black.withOpacity(0.75),
                       fontSize: 24,
@@ -76,7 +83,10 @@ class _HomeState extends State<Home> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            logOutService();
+                                            Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context)=>SignInP()));
+                                          },
                                           icon: Icon(
                                             Icons.check,
                                             size: 32,
