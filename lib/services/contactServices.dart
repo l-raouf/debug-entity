@@ -8,9 +8,7 @@ void sendMessage(String email, String title, String body) async {
       .collection("contactUs")
       .doc(id)
       .set({"id": id, "email": email, "title": title, "body": body})
-      .then((value) => Fluttertoast.showToast(
-          msg:
-              "Thank you for your suggestion, we will make sure to check it out"))
+      .then((value) => {})
       .catchError((error) => Fluttertoast.showToast(
           msg: "something went wrong, check your connection or try later"));
 }
