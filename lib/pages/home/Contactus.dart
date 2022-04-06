@@ -35,12 +35,8 @@ class _ContactUsState extends State<ContactUs> {
                         padding: EdgeInsets.fromLTRB(12, 4, 0, 0),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProfileP(
-                                        user: widget.user!,
-                                      )),
+                            Navigator.pop(
+                              context
                             );
                           },
                           child: Text(
