@@ -44,6 +44,10 @@ class _MainAdminState extends State<MainAdmin> {
               label: 'Validation',
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.message),
+              label: 'Messages',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Profile',
             ),

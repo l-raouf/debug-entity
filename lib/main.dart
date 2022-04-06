@@ -1,5 +1,6 @@
 import 'package:debug_entity/pages/AdminDashboard/AdminDashboard.dart';
 import 'package:debug_entity/pages/AdminFoodValidation/FoodValidation.dart';
+import 'package:debug_entity/pages/Profile/ProfileP.dart';
 import 'package:debug_entity/pages/Register/RegisterP.dart';
 import 'package:debug_entity/pages/SignIn/SignInP.dart';
 import 'package:debug_entity/pages/leaderboard/LeaderBoard.dart';
@@ -13,7 +14,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: RegisterP(),
+    home: MainAdmin(),
   ));
 /*
 import 'package:debug_entity/pages/Profile/ProfileP.dart';

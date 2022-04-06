@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:debug_entity/pages/home/Contactus.dart';
 import 'package:flutter/material.dart';
 
 class ProfileP extends StatefulWidget {
@@ -13,8 +14,9 @@ class _ProfilePState extends State<ProfileP> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return SafeArea(
-        child: Container(
+    return Scaffold(
+        body: SafeArea(
+            child: Container(
       child: Column(children: [
         Container(
           height: screenSize.height * 0.3,
@@ -30,17 +32,25 @@ class _ProfilePState extends State<ProfileP> {
             ),
             Positioned(
                 top: 20,
-                left: 20,
-                child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      'Back',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ))),
+                right: 20,
+                child: GestureDetector(
+                    onTap: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ContactUs()),
+                          )
+                        },
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'Support',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )))),
             Align(
                 alignment: Alignment(0, 2.2),
                 child: CircleAvatar(
@@ -68,13 +78,15 @@ class _ProfilePState extends State<ProfileP> {
                             child: Text(
                               'Goals',
                               style: TextStyle(
-                                  fontSize: 23, fontWeight: FontWeight.bold),
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                           Container(
                             child: Text(
                               '12',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(
+                                  fontSize: 23, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ]),
@@ -88,12 +100,14 @@ class _ProfilePState extends State<ProfileP> {
                           Container(
                             child: Text('Receip',
                                 style: TextStyle(
-                                    fontSize: 23, fontWeight: FontWeight.bold)),
+                                  fontSize: 20,
+                                )),
                           ),
                           Container(
                             child: Text(
                               '24',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(
+                                  fontSize: 23, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ]),
@@ -107,14 +121,14 @@ class _ProfilePState extends State<ProfileP> {
                           Container(
                             child: Text(
                               'Following',
-                              style: TextStyle(
-                                  fontSize: 23, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 20),
                             ),
                           ),
                           Container(
                             child: Text(
                               '98',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(
+                                  fontSize: 23, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ]),
@@ -165,6 +179,6 @@ class _ProfilePState extends State<ProfileP> {
           ]),
         ),
       ]),
-    ));
+    )));
   }
 }
