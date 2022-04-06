@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../Register/RegisterP.dart';
+import '../SignIn/SignInP.dart';
+
 class Intro extends StatelessWidget {
   const Intro({Key? key}) : super(key: key);
 
@@ -113,7 +116,9 @@ class Intro extends StatelessWidget {
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context)=>SignInP()));
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
@@ -143,7 +148,9 @@ class Intro extends StatelessWidget {
                 ),
                 SizedBox(width: 32.0),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context)=>RegisterP()));
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
